@@ -9,6 +9,8 @@ export type EinvoiceStatus = "valid" | "pending" | "selfbill" | "na";
 
 export interface Property {
   id: string;
+  /** N3 tenant code that owns this row. Replaces user_id scoping. */
+  tenant_code: string;
   name: string;
   address: string;
   area: string;
@@ -22,6 +24,8 @@ export interface Property {
 
 export interface Tenancy {
   id: string;
+  /** N3 tenant code that owns this row. Replaces user_id scoping. */
+  tenant_code: string;
   property_id: string;
   tenant_name: string;
   tenant_type: TenantType;
@@ -36,5 +40,6 @@ export interface Tenancy {
   notes: string;
 }
 
-export type NewProperty = Omit<Property, "id">;
-export type NewTenancy = Omit<Tenancy, "id">;
+export type NewProperty = Omit<Property, "id" | "tenant_code">;
+export type NewTenancy = Omit<Tenancy, "id" | "tenant_code">;
+

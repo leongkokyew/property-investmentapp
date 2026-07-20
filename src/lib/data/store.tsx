@@ -33,9 +33,18 @@ const uid = () =>
     ? crypto.randomUUID()
     : Math.random().toString(36).slice(2) + Date.now().toString(36);
 
+/**
+ * Placeholder tenant code used to scope mock rows. When this app is
+ * wired to real Supabase-backed storage, replace this constant with
+ * the tenant_code sourced from the active N3 session.
+ */
+export const MOCK_TENANT_CODE = "DEV-TENANT-001";
+
+
 const seedProperties: Property[] = [
   {
     id: "p1",
+    tenant_code: MOCK_TENANT_CODE,
     name: "Bangsar Heights Condo A-12-3",
     address: "12 Jalan Bangsar, Bangsar",
     area: "Bangsar",
@@ -48,6 +57,7 @@ const seedProperties: Property[] = [
   },
   {
     id: "p2",
+    tenant_code: MOCK_TENANT_CODE,
     name: "KLCC Suites Unit 25-08",
     address: "Jalan Pinang, KLCC",
     area: "KLCC",
@@ -60,6 +70,7 @@ const seedProperties: Property[] = [
   },
   {
     id: "p3",
+    tenant_code: MOCK_TENANT_CODE,
     name: "Shah Alam Shop Lot 4",
     address: "Seksyen 13, Shah Alam",
     area: "Seksyen 13",
@@ -72,6 +83,7 @@ const seedProperties: Property[] = [
   },
   {
     id: "p4",
+    tenant_code: MOCK_TENANT_CODE,
     name: "Penang Georgetown Heritage Shop",
     address: "Lebuh Armenian, Georgetown",
     area: "Georgetown",
@@ -87,6 +99,7 @@ const seedProperties: Property[] = [
 const seedTenancies: Tenancy[] = [
   {
     id: "t1",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p1",
     tenant_name: "Sarah Lim",
     tenant_type: "individual",
@@ -102,6 +115,7 @@ const seedTenancies: Tenancy[] = [
   },
   {
     id: "t2",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p1",
     tenant_name: "John Tan",
     tenant_type: "individual",
@@ -117,6 +131,7 @@ const seedTenancies: Tenancy[] = [
   },
   {
     id: "t3",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p2",
     tenant_name: "Acme Trading Sdn Bhd",
     tenant_type: "company",
@@ -132,6 +147,7 @@ const seedTenancies: Tenancy[] = [
   },
   {
     id: "t4",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p3",
     tenant_name: "Warung Selera Kita",
     tenant_type: "company",
@@ -184,7 +200,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   );
 
   const createProperty = useCallback((data: NewProperty): Property => {
-    const p: Property = { ...data, id: uid() };
+    const p: Property = { ...data, id: uid(), tenant_code: MOCK_TENANT_CODE };
     setProperties((cur) => [...cur, p]);
     return p;
   }, []);
@@ -219,7 +235,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           );
         }
       }
-      const t: Tenancy = { ...data, id: uid() };
+      const t: Tenancy = { ...data, id: uid(), tenant_code: MOCK_TENANT_CODE };
       setTenancies((cur) => [...cur, t]);
       return t;
     },
