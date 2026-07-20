@@ -44,6 +44,7 @@ export const MOCK_TENANT_CODE = "DEV-TENANT-001";
 const seedProperties: Property[] = [
   {
     id: "p1",
+    tenant_code: MOCK_TENANT_CODE,
     name: "Bangsar Heights Condo A-12-3",
     address: "12 Jalan Bangsar, Bangsar",
     area: "Bangsar",
@@ -56,6 +57,7 @@ const seedProperties: Property[] = [
   },
   {
     id: "p2",
+    tenant_code: MOCK_TENANT_CODE,
     name: "KLCC Suites Unit 25-08",
     address: "Jalan Pinang, KLCC",
     area: "KLCC",
@@ -68,6 +70,7 @@ const seedProperties: Property[] = [
   },
   {
     id: "p3",
+    tenant_code: MOCK_TENANT_CODE,
     name: "Shah Alam Shop Lot 4",
     address: "Seksyen 13, Shah Alam",
     area: "Seksyen 13",
@@ -80,6 +83,7 @@ const seedProperties: Property[] = [
   },
   {
     id: "p4",
+    tenant_code: MOCK_TENANT_CODE,
     name: "Penang Georgetown Heritage Shop",
     address: "Lebuh Armenian, Georgetown",
     area: "Georgetown",
@@ -95,6 +99,7 @@ const seedProperties: Property[] = [
 const seedTenancies: Tenancy[] = [
   {
     id: "t1",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p1",
     tenant_name: "Sarah Lim",
     tenant_type: "individual",
@@ -110,6 +115,7 @@ const seedTenancies: Tenancy[] = [
   },
   {
     id: "t2",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p1",
     tenant_name: "John Tan",
     tenant_type: "individual",
@@ -125,6 +131,7 @@ const seedTenancies: Tenancy[] = [
   },
   {
     id: "t3",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p2",
     tenant_name: "Acme Trading Sdn Bhd",
     tenant_type: "company",
@@ -140,6 +147,7 @@ const seedTenancies: Tenancy[] = [
   },
   {
     id: "t4",
+    tenant_code: MOCK_TENANT_CODE,
     property_id: "p3",
     tenant_name: "Warung Selera Kita",
     tenant_type: "company",
