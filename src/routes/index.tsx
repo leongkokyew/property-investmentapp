@@ -31,11 +31,11 @@ export const Route = createFileRoute("/")({
         content:
           "Manage your property investment portfolio: track properties, tenancies, invoices and payments alongside QNE N3 accounting.",
       },
-      { property: "og:title", content: "Property Investment Manager" },
+      { property: "og:title", content: "Properties · Property Investment Manager" },
       {
         property: "og:description",
         content:
-          "Portfolio management for property investors — works alongside QNE N3 cloud accounting.",
+          "Manage your property investment portfolio: track properties, tenancies, invoices and payments alongside QNE N3 accounting.",
       },
     ],
   }),

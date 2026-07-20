@@ -81,20 +81,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Property Investment Manager" },
+      { title: "Properties · Property Investment Manager" },
       {
         name: "description",
         content:
-          "Manage your property portfolio and tenancies alongside QNE N3 cloud accounting.",
+          "Manage your property investment portfolio: track properties, tenancies, invoices and payments alongside QNE N3 accounting.",
       },
-      { property: "og:title", content: "Property Investment Manager" },
+      { property: "og:title", content: "Properties · Property Investment Manager" },
       {
         property: "og:description",
         content:
-          "Portfolio management for property investors — properties, tenancies, invoice and e-invoice tracking.",
+          "Manage your property investment portfolio: track properties, tenancies, invoices and payments alongside QNE N3 accounting.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Properties · Property Investment Manager" },
+      { name: "twitter:description", content: "Manage your property investment portfolio: track properties, tenancies, invoices and payments alongside QNE N3 accounting." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3f495d1-fc96-40e3-9d9b-c9b1a1359f0c/id-preview-9eafa3da--abd69d62-92d5-4550-ac89-dfd5d0cb1f26.lovable.app-1784538192628.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/e3f495d1-fc96-40e3-9d9b-c9b1a1359f0c/id-preview-9eafa3da--abd69d62-92d5-4550-ac89-dfd5d0cb1f26.lovable.app-1784538192628.png" },
     ],
     links: [
       {
