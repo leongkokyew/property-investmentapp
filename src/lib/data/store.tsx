@@ -200,7 +200,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
   );
 
   const createProperty = useCallback((data: NewProperty): Property => {
-    const p: Property = { ...data, id: uid() };
+    const p: Property = { ...data, id: uid(), tenant_code: MOCK_TENANT_CODE };
     setProperties((cur) => [...cur, p]);
     return p;
   }, []);
@@ -235,7 +235,7 @@ export function DataProvider({ children }: { children: ReactNode }) {
           );
         }
       }
-      const t: Tenancy = { ...data, id: uid() };
+      const t: Tenancy = { ...data, id: uid(), tenant_code: MOCK_TENANT_CODE };
       setTenancies((cur) => [...cur, t]);
       return t;
     },
