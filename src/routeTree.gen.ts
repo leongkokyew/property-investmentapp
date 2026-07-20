@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PropertiesIdRouteImport } from './routes/properties.$id'
+import { Route as ApiN3ConnectRouteImport } from './routes/api/n3.connect'
+import { Route as ApiN3BasicInfoRouteImport } from './routes/api/n3.basic-info'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,54 @@ const PropertiesIdRoute = PropertiesIdRouteImport.update({
   path: '/properties/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiN3ConnectRoute = ApiN3ConnectRouteImport.update({
+  id: '/api/n3/connect',
+  path: '/api/n3/connect',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiN3BasicInfoRoute = ApiN3BasicInfoRouteImport.update({
+  id: '/api/n3/basic-info',
+  path: '/api/n3/basic-info',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/api/n3/basic-info': typeof ApiN3BasicInfoRoute
+  '/api/n3/connect': typeof ApiN3ConnectRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/api/n3/basic-info': typeof ApiN3BasicInfoRoute
+  '/api/n3/connect': typeof ApiN3ConnectRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/properties/$id': typeof PropertiesIdRoute
+  '/api/n3/basic-info': typeof ApiN3BasicInfoRoute
+  '/api/n3/connect': typeof ApiN3ConnectRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/properties/$id'
+  fullPaths: '/' | '/properties/$id' | '/api/n3/basic-info' | '/api/n3/connect'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/properties/$id'
-  id: '__root__' | '/' | '/properties/$id'
+  to: '/' | '/properties/$id' | '/api/n3/basic-info' | '/api/n3/connect'
+  id:
+    | '__root__'
+    | '/'
+    | '/properties/$id'
+    | '/api/n3/basic-info'
+    | '/api/n3/connect'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   PropertiesIdRoute: typeof PropertiesIdRoute
+  ApiN3BasicInfoRoute: typeof ApiN3BasicInfoRoute
+  ApiN3ConnectRoute: typeof ApiN3ConnectRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,23 +90,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PropertiesIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/n3/connect': {
+      id: '/api/n3/connect'
+      path: '/api/n3/connect'
+      fullPath: '/api/n3/connect'
+      preLoaderRoute: typeof ApiN3ConnectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/n3/basic-info': {
+      id: '/api/n3/basic-info'
+      path: '/api/n3/basic-info'
+      fullPath: '/api/n3/basic-info'
+      preLoaderRoute: typeof ApiN3BasicInfoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   PropertiesIdRoute: PropertiesIdRoute,
+  ApiN3BasicInfoRoute: ApiN3BasicInfoRoute,
+  ApiN3ConnectRoute: ApiN3ConnectRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
