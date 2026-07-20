@@ -40,5 +40,6 @@ export interface Tenancy {
   notes: string;
 }
 
-export type NewProperty = Omit<Property, "id">;
-export type NewTenancy = Omit<Tenancy, "id">;
+export type NewProperty = Omit<Property, "id" | "tenant_code">;
+export type NewTenancy = Omit<Tenancy, "id" | "tenant_code">;
+

@@ -33,6 +33,14 @@ const uid = () =>
     ? crypto.randomUUID()
     : Math.random().toString(36).slice(2) + Date.now().toString(36);
 
+/**
+ * Placeholder tenant code used to scope mock rows. When this app is
+ * wired to real Supabase-backed storage, replace this constant with
+ * the tenant_code sourced from the active N3 session.
+ */
+export const MOCK_TENANT_CODE = "DEV-TENANT-001";
+
+
 const seedProperties: Property[] = [
   {
     id: "p1",
