@@ -62,7 +62,7 @@ export const Route = createFileRoute("/api/n3/connect")({
         if (!token) {
           return Response.json(
             { error: "N3 response did not contain a token", detail: text.slice(0, 500) },
-            { status: 502 },
+            { status: 400 },
           );
         }
 
