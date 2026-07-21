@@ -74,9 +74,14 @@ function NoSessionScreen() {
         setDevError("Dev connect is disabled in this build.");
         return;
       }
-      const json = (await res.json()) as { access_token?: string; error?: string };
+      const json = (await res.json()) as {
+        access_token?: string;
+        error?: string;
+        detail?: string;
+      };
       if (!res.ok || !json.access_token) {
-        setDevError(json.error ?? `Connect failed (${res.status})`);
+        const base = json.error ?? `Connect failed (${res.status})`;
+        setDevError(json.detail ? `${base} — ${json.detail}` : base);
         return;
       }
       setToken(json.access_token);
