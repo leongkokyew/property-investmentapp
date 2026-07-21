@@ -34,6 +34,7 @@ export const Route = createFileRoute("/api/n3/connect")({
         );
 
         const text = await upstream.text();
+        console.log("N3 raw response:", text);
         if (!upstream.ok) {
           return Response.json(
             { error: "N3 connect failed", status: upstream.status, detail: text.slice(0, 500) },
@@ -48,10 +49,38 @@ export const Route = createFileRoute("/api/n3/connect")({
           if (typeof parsed === "string") token = parsed;
           else if (parsed && typeof parsed === "object") {
             const obj = parsed as Record<string, unknown>;
-            for (const k of ["access_token", "accessToken", "token", "jwt"]) {
-              if (typeof obj[k] === "string") {
+            const topKeys = [
+              "access_token",
+              "accessToken",
+              "token",
+              "jwt",
+              "Token",
+              "AccessToken",
+            ];
+            for (const k of topKeys) {
+              if (typeof obj[k] === "string" && (obj[k] as string).trim()) {
                 token = obj[k] as string;
                 break;
+              }
+            }
+            if (!token) {
+              const nested: Array<[string, string]> = [
+                ["data", "access_token"],
+                ["data", "accessToken"],
+                ["data", "token"],
+                ["data", "jwt"],
+                ["result", "access_token"],
+                ["result", "token"],
+              ];
+              for (const [outer, inner] of nested) {
+                const o = obj[outer];
+                if (o && typeof o === "object") {
+                  const v = (o as Record<string, unknown>)[inner];
+                  if (typeof v === "string" && v.trim()) {
+                    token = v;
+                    break;
+                  }
+                }
               }
             }
           }
