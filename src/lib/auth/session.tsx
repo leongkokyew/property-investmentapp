@@ -43,23 +43,37 @@ function pick(obj: Record<string, unknown>, keys: string[]): string {
   return "";
 }
 
-function normalizeBasicInfo(raw: unknown): SessionInfo {
+function decodeJwtClaims(token: string): { tenantCode: string; email: string } {
+  try {
+    const payload = JSON.parse(atob(token.split(".")[1])) as Record<string, unknown>;
+    const tenantCode =
+      (payload.tenantCode as string | undefined) ??
+      (payload.tenant_code as string | undefined) ??
+      "—";
+    const rawEmail =
+      (payload.email as string | string[] | undefined) ??
+      (payload.sub as string | string[] | undefined) ??
+      "—";
+    const email = Array.isArray(rawEmail) ? rawEmail[0] ?? "—" : rawEmail;
+    return { tenantCode: String(tenantCode), email: String(email) };
+  } catch {
+    return { tenantCode: "—", email: "—" };
+  }
+}
+
+function normalizeBasicInfo(raw: unknown, token: string): SessionInfo {
   const obj = (raw && typeof raw === "object" ? raw : {}) as Record<string, unknown>;
   const inner =
     obj.data && typeof obj.data === "object"
       ? (obj.data as Record<string, unknown>)
       : obj;
 
+  const { tenantCode, email } = decodeJwtClaims(token);
+
   return {
     companyName: pick(inner, ["companyName", "CompanyName", "company_name", "name"]),
-    tenantCode: pick(inner, [
-      "tenantCode",
-      "TenantCode",
-      "tenant_code",
-      "tenantId",
-      "TenantId",
-    ]),
-    email: pick(inner, ["email", "Email", "userEmail", "UserEmail"]),
+    tenantCode,
+    email,
   };
 }
 
@@ -102,7 +116,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         throw new Error(`Failed to load company profile (${res.status}): ${body.slice(0, 200)}`);
       }
       const json = (await res.json()) as unknown;
-      setInfo(normalizeBasicInfo(json));
+      setInfo(normalizeBasicInfo(json, t));
     } catch (e) {
       setInfo(null);
       setError(e instanceof Error ? e.message : "Failed to load company profile");
