@@ -116,7 +116,7 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         throw new Error(`Failed to load company profile (${res.status}): ${body.slice(0, 200)}`);
       }
       const json = (await res.json()) as unknown;
-      setInfo(normalizeBasicInfo(json));
+      setInfo(normalizeBasicInfo(json, t));
     } catch (e) {
       setInfo(null);
       setError(e instanceof Error ? e.message : "Failed to load company profile");
