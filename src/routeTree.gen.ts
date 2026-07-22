@@ -11,6 +11,10 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PropertiesIdRouteImport } from './routes/properties.$id'
+import { Route as ApiN3ReceiptsRouteImport } from './routes/api/n3.receipts'
+import { Route as ApiN3InvoicesRouteImport } from './routes/api/n3.invoices'
+import { Route as ApiN3DebitsRouteImport } from './routes/api/n3.debits'
+import { Route as ApiN3CreditsRouteImport } from './routes/api/n3.credits'
 import { Route as ApiN3ConnectRouteImport } from './routes/api/n3.connect'
 import { Route as ApiN3BasicInfoRouteImport } from './routes/api/n3.basic-info'
 
@@ -22,6 +26,26 @@ const IndexRoute = IndexRouteImport.update({
 const PropertiesIdRoute = PropertiesIdRouteImport.update({
   id: '/properties/$id',
   path: '/properties/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiN3ReceiptsRoute = ApiN3ReceiptsRouteImport.update({
+  id: '/api/n3/receipts',
+  path: '/api/n3/receipts',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiN3InvoicesRoute = ApiN3InvoicesRouteImport.update({
+  id: '/api/n3/invoices',
+  path: '/api/n3/invoices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiN3DebitsRoute = ApiN3DebitsRouteImport.update({
+  id: '/api/n3/debits',
+  path: '/api/n3/debits',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiN3CreditsRoute = ApiN3CreditsRouteImport.update({
+  id: '/api/n3/credits',
+  path: '/api/n3/credits',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiN3ConnectRoute = ApiN3ConnectRouteImport.update({
@@ -40,12 +64,20 @@ export interface FileRoutesByFullPath {
   '/properties/$id': typeof PropertiesIdRoute
   '/api/n3/basic-info': typeof ApiN3BasicInfoRoute
   '/api/n3/connect': typeof ApiN3ConnectRoute
+  '/api/n3/credits': typeof ApiN3CreditsRoute
+  '/api/n3/debits': typeof ApiN3DebitsRoute
+  '/api/n3/invoices': typeof ApiN3InvoicesRoute
+  '/api/n3/receipts': typeof ApiN3ReceiptsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/properties/$id': typeof PropertiesIdRoute
   '/api/n3/basic-info': typeof ApiN3BasicInfoRoute
   '/api/n3/connect': typeof ApiN3ConnectRoute
+  '/api/n3/credits': typeof ApiN3CreditsRoute
+  '/api/n3/debits': typeof ApiN3DebitsRoute
+  '/api/n3/invoices': typeof ApiN3InvoicesRoute
+  '/api/n3/receipts': typeof ApiN3ReceiptsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,18 +85,42 @@ export interface FileRoutesById {
   '/properties/$id': typeof PropertiesIdRoute
   '/api/n3/basic-info': typeof ApiN3BasicInfoRoute
   '/api/n3/connect': typeof ApiN3ConnectRoute
+  '/api/n3/credits': typeof ApiN3CreditsRoute
+  '/api/n3/debits': typeof ApiN3DebitsRoute
+  '/api/n3/invoices': typeof ApiN3InvoicesRoute
+  '/api/n3/receipts': typeof ApiN3ReceiptsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/properties/$id' | '/api/n3/basic-info' | '/api/n3/connect'
+  fullPaths:
+    | '/'
+    | '/properties/$id'
+    | '/api/n3/basic-info'
+    | '/api/n3/connect'
+    | '/api/n3/credits'
+    | '/api/n3/debits'
+    | '/api/n3/invoices'
+    | '/api/n3/receipts'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/properties/$id' | '/api/n3/basic-info' | '/api/n3/connect'
+  to:
+    | '/'
+    | '/properties/$id'
+    | '/api/n3/basic-info'
+    | '/api/n3/connect'
+    | '/api/n3/credits'
+    | '/api/n3/debits'
+    | '/api/n3/invoices'
+    | '/api/n3/receipts'
   id:
     | '__root__'
     | '/'
     | '/properties/$id'
     | '/api/n3/basic-info'
     | '/api/n3/connect'
+    | '/api/n3/credits'
+    | '/api/n3/debits'
+    | '/api/n3/invoices'
+    | '/api/n3/receipts'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -72,6 +128,10 @@ export interface RootRouteChildren {
   PropertiesIdRoute: typeof PropertiesIdRoute
   ApiN3BasicInfoRoute: typeof ApiN3BasicInfoRoute
   ApiN3ConnectRoute: typeof ApiN3ConnectRoute
+  ApiN3CreditsRoute: typeof ApiN3CreditsRoute
+  ApiN3DebitsRoute: typeof ApiN3DebitsRoute
+  ApiN3InvoicesRoute: typeof ApiN3InvoicesRoute
+  ApiN3ReceiptsRoute: typeof ApiN3ReceiptsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -88,6 +148,34 @@ declare module '@tanstack/react-router' {
       path: '/properties/$id'
       fullPath: '/properties/$id'
       preLoaderRoute: typeof PropertiesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/n3/receipts': {
+      id: '/api/n3/receipts'
+      path: '/api/n3/receipts'
+      fullPath: '/api/n3/receipts'
+      preLoaderRoute: typeof ApiN3ReceiptsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/n3/invoices': {
+      id: '/api/n3/invoices'
+      path: '/api/n3/invoices'
+      fullPath: '/api/n3/invoices'
+      preLoaderRoute: typeof ApiN3InvoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/n3/debits': {
+      id: '/api/n3/debits'
+      path: '/api/n3/debits'
+      fullPath: '/api/n3/debits'
+      preLoaderRoute: typeof ApiN3DebitsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/n3/credits': {
+      id: '/api/n3/credits'
+      path: '/api/n3/credits'
+      fullPath: '/api/n3/credits'
+      preLoaderRoute: typeof ApiN3CreditsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/n3/connect': {
@@ -112,6 +200,10 @@ const rootRouteChildren: RootRouteChildren = {
   PropertiesIdRoute: PropertiesIdRoute,
   ApiN3BasicInfoRoute: ApiN3BasicInfoRoute,
   ApiN3ConnectRoute: ApiN3ConnectRoute,
+  ApiN3CreditsRoute: ApiN3CreditsRoute,
+  ApiN3DebitsRoute: ApiN3DebitsRoute,
+  ApiN3InvoicesRoute: ApiN3InvoicesRoute,
+  ApiN3ReceiptsRoute: ApiN3ReceiptsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
