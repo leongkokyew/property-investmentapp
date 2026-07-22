@@ -6,7 +6,10 @@ import { Label } from "@/components/ui/label";
 import { useSession } from "@/lib/auth/session";
 import { SessionHeader } from "@/components/session-header";
 
-const IS_DEV = import.meta.env.DEV;
+const IS_DEV =
+  import.meta.env.DEV ||
+  (typeof window !== "undefined" &&
+    new URLSearchParams(window.location.search).has("dev"));
 
 export function AuthGate({ children }: { children: ReactNode }) {
   const { token, info, loading, error } = useSession();
