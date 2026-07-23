@@ -86,8 +86,25 @@ export function SessionProvider({ children }: { children: ReactNode }) {
   // Read token from localStorage after mount (browser-only).
   useEffect(() => {
     try {
+      // Path A: token arrives in URL from N3 My Apps (?token=JWT)
+      const params = new URLSearchParams(window.location.search);
+      const urlToken = params.get("token");
+      if (urlToken?.trim()) {
+        localStorage.setItem(TOKEN_KEY, urlToken.trim());
+        // Remove token from URL to prevent leakage in referrer headers / bookmarks
+        params.delete("token");
+        const newSearch = params.toString();
+        window.history.replaceState(
+          null,
+          "",
+          window.location.pathname + (newSearch ? `?${newSearch}` : "") + window.location.hash,
+        );
+        setTokenState(urlToken.trim());
+        return;
+      }
+      // Path B / returning user: fall back to localStorage
       const t = localStorage.getItem(TOKEN_KEY);
-      setTokenState(t && t.trim() ? t : null);
+      setTokenState(t?.trim() ? t : null);
     } catch {
       setTokenState(null);
     }
