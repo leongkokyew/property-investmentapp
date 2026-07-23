@@ -1,8 +1,3 @@
-bash
-
-cat /mnt/user-data/outputs/framework/docs/BUSINESS_RULE.md
-Output
-
 # BUSINESS_RULE.md
 # Property Investment Manager — Business Rules
 
