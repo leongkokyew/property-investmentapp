@@ -28,6 +28,7 @@ const emptyProperty: NewProperty = {
   purchase_price: 0,
   purchase_date: new Date().toISOString().slice(0, 10),
   status: "active",
+  n3_project_code: "",
   notes: "",
 };
 
@@ -141,6 +142,17 @@ export function PropertyForm({
             onChange={(e) => set("purchase_date", e.target.value)}
           />
         </div>
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="n3code">N3 Project Code</Label>
+        <Input
+          id="n3code"
+          value={form.n3_project_code ?? ""}
+          onChange={(e) => set("n3_project_code", e.target.value)}
+        />
+        <p className="text-xs text-muted-foreground">
+          Link to N3 Child Project. Set once — do not change after saving.
+        </p>
       </div>
       <div className="grid gap-2">
         <Label htmlFor="notes">Notes</Label>

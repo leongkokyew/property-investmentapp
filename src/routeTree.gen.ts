@@ -11,12 +11,16 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PropertiesIdRouteImport } from './routes/properties.$id'
+import { Route as ApiSupabaseTenanciesRouteImport } from './routes/api/supabase.tenancies'
+import { Route as ApiSupabasePropertiesRouteImport } from './routes/api/supabase.properties'
 import { Route as ApiN3ReceiptsRouteImport } from './routes/api/n3.receipts'
 import { Route as ApiN3InvoicesRouteImport } from './routes/api/n3.invoices'
 import { Route as ApiN3DebitsRouteImport } from './routes/api/n3.debits'
 import { Route as ApiN3CreditsRouteImport } from './routes/api/n3.credits'
 import { Route as ApiN3ConnectRouteImport } from './routes/api/n3.connect'
 import { Route as ApiN3BasicInfoRouteImport } from './routes/api/n3.basic-info'
+import { Route as ApiSupabaseTenanciesIdRouteImport } from './routes/api/supabase.tenancies.$id'
+import { Route as ApiSupabasePropertiesIdRouteImport } from './routes/api/supabase.properties.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -26,6 +30,16 @@ const IndexRoute = IndexRouteImport.update({
 const PropertiesIdRoute = PropertiesIdRouteImport.update({
   id: '/properties/$id',
   path: '/properties/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSupabaseTenanciesRoute = ApiSupabaseTenanciesRouteImport.update({
+  id: '/api/supabase/tenancies',
+  path: '/api/supabase/tenancies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSupabasePropertiesRoute = ApiSupabasePropertiesRouteImport.update({
+  id: '/api/supabase/properties',
+  path: '/api/supabase/properties',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiN3ReceiptsRoute = ApiN3ReceiptsRouteImport.update({
@@ -58,6 +72,16 @@ const ApiN3BasicInfoRoute = ApiN3BasicInfoRouteImport.update({
   path: '/api/n3/basic-info',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiSupabaseTenanciesIdRoute = ApiSupabaseTenanciesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiSupabaseTenanciesRoute,
+} as any)
+const ApiSupabasePropertiesIdRoute = ApiSupabasePropertiesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ApiSupabasePropertiesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -68,6 +92,10 @@ export interface FileRoutesByFullPath {
   '/api/n3/debits': typeof ApiN3DebitsRoute
   '/api/n3/invoices': typeof ApiN3InvoicesRoute
   '/api/n3/receipts': typeof ApiN3ReceiptsRoute
+  '/api/supabase/properties': typeof ApiSupabasePropertiesRouteWithChildren
+  '/api/supabase/tenancies': typeof ApiSupabaseTenanciesRouteWithChildren
+  '/api/supabase/properties/$id': typeof ApiSupabasePropertiesIdRoute
+  '/api/supabase/tenancies/$id': typeof ApiSupabaseTenanciesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -78,6 +106,10 @@ export interface FileRoutesByTo {
   '/api/n3/debits': typeof ApiN3DebitsRoute
   '/api/n3/invoices': typeof ApiN3InvoicesRoute
   '/api/n3/receipts': typeof ApiN3ReceiptsRoute
+  '/api/supabase/properties': typeof ApiSupabasePropertiesRouteWithChildren
+  '/api/supabase/tenancies': typeof ApiSupabaseTenanciesRouteWithChildren
+  '/api/supabase/properties/$id': typeof ApiSupabasePropertiesIdRoute
+  '/api/supabase/tenancies/$id': typeof ApiSupabaseTenanciesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -89,6 +121,10 @@ export interface FileRoutesById {
   '/api/n3/debits': typeof ApiN3DebitsRoute
   '/api/n3/invoices': typeof ApiN3InvoicesRoute
   '/api/n3/receipts': typeof ApiN3ReceiptsRoute
+  '/api/supabase/properties': typeof ApiSupabasePropertiesRouteWithChildren
+  '/api/supabase/tenancies': typeof ApiSupabaseTenanciesRouteWithChildren
+  '/api/supabase/properties/$id': typeof ApiSupabasePropertiesIdRoute
+  '/api/supabase/tenancies/$id': typeof ApiSupabaseTenanciesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,6 +137,10 @@ export interface FileRouteTypes {
     | '/api/n3/debits'
     | '/api/n3/invoices'
     | '/api/n3/receipts'
+    | '/api/supabase/properties'
+    | '/api/supabase/tenancies'
+    | '/api/supabase/properties/$id'
+    | '/api/supabase/tenancies/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -111,6 +151,10 @@ export interface FileRouteTypes {
     | '/api/n3/debits'
     | '/api/n3/invoices'
     | '/api/n3/receipts'
+    | '/api/supabase/properties'
+    | '/api/supabase/tenancies'
+    | '/api/supabase/properties/$id'
+    | '/api/supabase/tenancies/$id'
   id:
     | '__root__'
     | '/'
@@ -121,6 +165,10 @@ export interface FileRouteTypes {
     | '/api/n3/debits'
     | '/api/n3/invoices'
     | '/api/n3/receipts'
+    | '/api/supabase/properties'
+    | '/api/supabase/tenancies'
+    | '/api/supabase/properties/$id'
+    | '/api/supabase/tenancies/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -132,6 +180,8 @@ export interface RootRouteChildren {
   ApiN3DebitsRoute: typeof ApiN3DebitsRoute
   ApiN3InvoicesRoute: typeof ApiN3InvoicesRoute
   ApiN3ReceiptsRoute: typeof ApiN3ReceiptsRoute
+  ApiSupabasePropertiesRoute: typeof ApiSupabasePropertiesRouteWithChildren
+  ApiSupabaseTenanciesRoute: typeof ApiSupabaseTenanciesRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -148,6 +198,20 @@ declare module '@tanstack/react-router' {
       path: '/properties/$id'
       fullPath: '/properties/$id'
       preLoaderRoute: typeof PropertiesIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/supabase/tenancies': {
+      id: '/api/supabase/tenancies'
+      path: '/api/supabase/tenancies'
+      fullPath: '/api/supabase/tenancies'
+      preLoaderRoute: typeof ApiSupabaseTenanciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/supabase/properties': {
+      id: '/api/supabase/properties'
+      path: '/api/supabase/properties'
+      fullPath: '/api/supabase/properties'
+      preLoaderRoute: typeof ApiSupabasePropertiesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/n3/receipts': {
@@ -192,8 +256,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiN3BasicInfoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/supabase/tenancies/$id': {
+      id: '/api/supabase/tenancies/$id'
+      path: '/$id'
+      fullPath: '/api/supabase/tenancies/$id'
+      preLoaderRoute: typeof ApiSupabaseTenanciesIdRouteImport
+      parentRoute: typeof ApiSupabaseTenanciesRoute
+    }
+    '/api/supabase/properties/$id': {
+      id: '/api/supabase/properties/$id'
+      path: '/$id'
+      fullPath: '/api/supabase/properties/$id'
+      preLoaderRoute: typeof ApiSupabasePropertiesIdRouteImport
+      parentRoute: typeof ApiSupabasePropertiesRoute
+    }
   }
 }
+
+interface ApiSupabasePropertiesRouteChildren {
+  ApiSupabasePropertiesIdRoute: typeof ApiSupabasePropertiesIdRoute
+}
+
+const ApiSupabasePropertiesRouteChildren: ApiSupabasePropertiesRouteChildren = {
+  ApiSupabasePropertiesIdRoute: ApiSupabasePropertiesIdRoute,
+}
+
+const ApiSupabasePropertiesRouteWithChildren =
+  ApiSupabasePropertiesRoute._addFileChildren(
+    ApiSupabasePropertiesRouteChildren,
+  )
+
+interface ApiSupabaseTenanciesRouteChildren {
+  ApiSupabaseTenanciesIdRoute: typeof ApiSupabaseTenanciesIdRoute
+}
+
+const ApiSupabaseTenanciesRouteChildren: ApiSupabaseTenanciesRouteChildren = {
+  ApiSupabaseTenanciesIdRoute: ApiSupabaseTenanciesIdRoute,
+}
+
+const ApiSupabaseTenanciesRouteWithChildren =
+  ApiSupabaseTenanciesRoute._addFileChildren(ApiSupabaseTenanciesRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -204,6 +306,8 @@ const rootRouteChildren: RootRouteChildren = {
   ApiN3DebitsRoute: ApiN3DebitsRoute,
   ApiN3InvoicesRoute: ApiN3InvoicesRoute,
   ApiN3ReceiptsRoute: ApiN3ReceiptsRoute,
+  ApiSupabasePropertiesRoute: ApiSupabasePropertiesRouteWithChildren,
+  ApiSupabaseTenanciesRoute: ApiSupabaseTenanciesRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

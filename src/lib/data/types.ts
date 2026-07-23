@@ -19,6 +19,10 @@ export interface Property {
   purchase_price: number;
   purchase_date: string; // ISO date
   status: PropertyStatus;
+  n3_project_code?: string;
+  n3_parent_project_code?: string;
+  created_at?: string;
+  updated_at?: string;
   notes: string;
 }
 
