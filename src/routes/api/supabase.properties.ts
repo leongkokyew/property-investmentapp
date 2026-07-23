@@ -49,7 +49,7 @@ export const Route = createFileRoute("/api/supabase/properties")({
         } catch {
           return Response.json({ error: "Invalid JSON body" }, { status: 400 });
         }
-        const row = { ...pick(body), tenant_code: check.auth.tenantCode };
+        const row: Record<string, unknown> = { ...pick(body), tenant_code: check.auth.tenantCode };
         if (!row.name || !row.address || !row.property_type || !row.purchase_date || !row.status) {
           return Response.json(
             { error: "Missing required fields" },
