@@ -144,6 +144,17 @@ export function PropertyForm({
         </div>
       </div>
       <div className="grid gap-2">
+        <Label htmlFor="n3code">N3 Project Code</Label>
+        <Input
+          id="n3code"
+          value={form.n3_project_code ?? ""}
+          onChange={(e) => set("n3_project_code", e.target.value)}
+        />
+        <p className="text-xs text-muted-foreground">
+          Link to N3 Child Project. Set once — do not change after saving.
+        </p>
+      </div>
+      <div className="grid gap-2">
         <Label htmlFor="notes">Notes</Label>
         <Textarea
           id="notes"
