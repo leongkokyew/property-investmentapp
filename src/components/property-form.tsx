@@ -28,6 +28,7 @@ const emptyProperty: NewProperty = {
   purchase_price: 0,
   purchase_date: new Date().toISOString().slice(0, 10),
   status: "active",
+  n3_project_code: "",
   notes: "",
 };
 
