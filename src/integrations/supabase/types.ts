@@ -14,7 +14,122 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      properties: {
+        Row: {
+          address: string
+          area: string | null
+          created_at: string | null
+          id: string
+          n3_parent_project_code: string | null
+          n3_project_code: string | null
+          name: string
+          notes: string | null
+          property_type: string
+          purchase_date: string
+          purchase_price: number
+          state: string | null
+          status: string
+          tenant_code: string
+          updated_at: string | null
+        }
+        Insert: {
+          address: string
+          area?: string | null
+          created_at?: string | null
+          id?: string
+          n3_parent_project_code?: string | null
+          n3_project_code?: string | null
+          name: string
+          notes?: string | null
+          property_type: string
+          purchase_date: string
+          purchase_price: number
+          state?: string | null
+          status: string
+          tenant_code: string
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string
+          area?: string | null
+          created_at?: string | null
+          id?: string
+          n3_parent_project_code?: string | null
+          n3_project_code?: string | null
+          name?: string
+          notes?: string | null
+          property_type?: string
+          purchase_date?: string
+          purchase_price?: number
+          state?: string | null
+          status?: string
+          tenant_code?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      tenancies: {
+        Row: {
+          created_at: string | null
+          einvoice_status: string
+          id: string
+          invoice_status: string
+          monthly_rent: number
+          notes: string | null
+          payment_status: string
+          property_id: string
+          tenancy_end: string
+          tenancy_start: string
+          tenancy_status: string
+          tenant_code: string
+          tenant_ic_or_reg: string | null
+          tenant_name: string
+          tenant_type: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          einvoice_status: string
+          id?: string
+          invoice_status: string
+          monthly_rent: number
+          notes?: string | null
+          payment_status: string
+          property_id: string
+          tenancy_end: string
+          tenancy_start: string
+          tenancy_status: string
+          tenant_code: string
+          tenant_ic_or_reg?: string | null
+          tenant_name: string
+          tenant_type?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          einvoice_status?: string
+          id?: string
+          invoice_status?: string
+          monthly_rent?: number
+          notes?: string | null
+          payment_status?: string
+          property_id?: string
+          tenancy_end?: string
+          tenancy_start?: string
+          tenancy_status?: string
+          tenant_code?: string
+          tenant_ic_or_reg?: string | null
+          tenant_name?: string
+          tenant_type?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "tenancies_property_id_fkey"
+            columns: ["property_id"]
+            isOneToOne: false
+            referencedRelation: "properties"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
