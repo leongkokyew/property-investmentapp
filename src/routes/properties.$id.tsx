@@ -56,6 +56,7 @@ function PropertyDetailPage() {
   const {
     getProperty,
     getTenancies,
+    fetchTenancies,
     updateProperty,
     createTenancy,
     updateTenancy,
