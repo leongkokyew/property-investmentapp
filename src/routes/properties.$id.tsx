@@ -217,9 +217,9 @@ function PropertyDetailPage() {
             <TenancyForm
               propertyId={property.id}
               initial={editingTenancy}
-              onSubmit={(data) => {
+              onSubmit={async (data) => {
                 try {
-                  updateTenancy(editingTenancy.id, data);
+                  await updateTenancy(editingTenancy.id, data);
                   toast.success("Tenancy updated");
                   setEditingTenancy(null);
                 } catch (e) {
