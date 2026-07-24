@@ -117,8 +117,8 @@ function PropertyDetailPage() {
             <PropertyForm
               initial={property}
               submitLabel="Save changes"
-              onSubmit={(data) => {
-                updateProperty(property.id, data);
+              onSubmit={async (data) => {
+                await updateProperty(property.id, data);
                 toast.success("Property updated");
               }}
             />
