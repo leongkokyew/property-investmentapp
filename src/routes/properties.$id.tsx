@@ -145,9 +145,9 @@ function PropertyDetailPage() {
                 </DialogHeader>
                 <TenancyForm
                   propertyId={property.id}
-                  onSubmit={(data) => {
+                  onSubmit={async (data) => {
                     try {
-                      createTenancy(data);
+                      await createTenancy(data);
                       toast.success("Tenancy created");
                       setAddOpen(false);
                     } catch (e) {
