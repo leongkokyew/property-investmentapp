@@ -66,6 +66,11 @@ function PropertyDetailPage() {
   const [editingTenancy, setEditingTenancy] = useState<Tenancy | null>(null);
   const [addOpen, setAddOpen] = useState(false);
 
+  useEffect(() => {
+    if (property) void fetchTenancies(property.id);
+  }, [property?.id]);
+
+
   if (!property) {
     return (
       <div className="mx-auto max-w-3xl px-6 py-12">
