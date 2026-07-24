@@ -21,6 +21,7 @@ import { PropertyForm } from "@/components/property-form";
 import { PropertyStatusBadge } from "@/components/status-badge";
 import { useData } from "@/lib/data/store";
 import { formatMYR } from "@/lib/format";
+import { toast } from "sonner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -88,8 +89,12 @@ function PropertyListPage() {
               </DialogHeader>
               <PropertyForm
                 onSubmit={async (data) => {
-                  await createProperty(data);
-                  setOpen(false);
+                  try {
+                    await createProperty(data);
+                    setOpen(false);
+                  } catch (e) {
+                    toast.error(e instanceof Error ? e.message : "Failed to add property");
+                  }
                 }}
                 onCancel={() => setOpen(false)}
                 submitLabel="Add property"
