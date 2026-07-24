@@ -66,6 +66,24 @@ export const Route = createFileRoute("/api/supabase/properties")({
         }
         return Response.json(data, { status: 201 });
       },
+      DELETE: async ({ request }) => {
+        const check = getTenantAuth(request);
+        if (!check.ok) return check.response;
+        const id = new URL(request.url).searchParams.get("id");
+        if (!id) return Response.json({ error: "Missing id" }, { status: 400 });
+        const { data: active } = await supabase
+          .from("tenancies").select("id")
+          .eq("property_id", id)
+          .eq("tenant_code", check.auth.tenantCode)
+          .eq("tenancy_status", "Active")
+          .maybeSingle();
+        if (active) return Response.json(
+          { error: "Cannot delete property with active tenancy" }, { status: 409 });
+        const { error } = await supabase.from("properties").delete()
+          .eq("id", id).eq("tenant_code", check.auth.tenantCode);
+        if (error) return Response.json({ error: error.message }, { status: 502 });
+        return new Response(null, { status: 204 });
+      },
     },
   },
 });

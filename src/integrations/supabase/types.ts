@@ -14,6 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
+      n3_credit_note_cache: {
+        Row: {
+          customer_code: string | null
+          customer_name: string | null
+          doc_code: string | null
+          doc_date: string | null
+          id: string
+          is_cancelled: boolean | null
+          n3_project_code: string | null
+          net_total_amount: number | null
+          outstanding_amount: number | null
+          refund_amount: number | null
+          status: string | null
+          synced_at: string | null
+          tenant_code: string
+        }
+        Insert: {
+          customer_code?: string | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          id: string
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          refund_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code: string
+        }
+        Update: {
+          customer_code?: string | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          id?: string
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          refund_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code?: string
+        }
+        Relationships: []
+      }
+      n3_debit_note_cache: {
+        Row: {
+          customer_code: string | null
+          customer_name: string | null
+          doc_code: string | null
+          doc_date: string | null
+          due_date: string | null
+          id: string
+          is_cancelled: boolean | null
+          n3_project_code: string | null
+          net_total_amount: number | null
+          outstanding_amount: number | null
+          status: string | null
+          synced_at: string | null
+          tenant_code: string
+        }
+        Insert: {
+          customer_code?: string | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          due_date?: string | null
+          id: string
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code: string
+        }
+        Update: {
+          customer_code?: string | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          due_date?: string | null
+          id?: string
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code?: string
+        }
+        Relationships: []
+      }
+      n3_invoice_cache: {
+        Row: {
+          customer_code: string | null
+          customer_id: number | null
+          customer_name: string | null
+          doc_code: string | null
+          doc_date: string | null
+          due_date: string | null
+          e_invoice_status: string | null
+          id: string
+          is_cancelled: boolean | null
+          n3_project_code: string | null
+          net_total_amount: number | null
+          outstanding_amount: number | null
+          status: string | null
+          synced_at: string | null
+          tenant_code: string
+        }
+        Insert: {
+          customer_code?: string | null
+          customer_id?: number | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          due_date?: string | null
+          e_invoice_status?: string | null
+          id: string
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code: string
+        }
+        Update: {
+          customer_code?: string | null
+          customer_id?: number | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          due_date?: string | null
+          e_invoice_status?: string | null
+          id?: string
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code?: string
+        }
+        Relationships: []
+      }
+      n3_receipt_cache: {
+        Row: {
+          customer_code: string | null
+          customer_name: string | null
+          doc_code: string | null
+          doc_date: string | null
+          id: string
+          is_bounced_cheque: boolean | null
+          is_cancelled: boolean | null
+          n3_project_code: string | null
+          net_total_amount: number | null
+          outstanding_amount: number | null
+          refund_amount: number | null
+          status: string | null
+          synced_at: string | null
+          tenant_code: string
+        }
+        Insert: {
+          customer_code?: string | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          id: string
+          is_bounced_cheque?: boolean | null
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          refund_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code: string
+        }
+        Update: {
+          customer_code?: string | null
+          customer_name?: string | null
+          doc_code?: string | null
+          doc_date?: string | null
+          id?: string
+          is_bounced_cheque?: boolean | null
+          is_cancelled?: boolean | null
+          n3_project_code?: string | null
+          net_total_amount?: number | null
+          outstanding_amount?: number | null
+          refund_amount?: number | null
+          status?: string | null
+          synced_at?: string | null
+          tenant_code?: string
+        }
+        Relationships: []
+      }
       properties: {
         Row: {
           address: string
