@@ -1,5 +1,5 @@
 import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -56,6 +56,7 @@ function PropertyDetailPage() {
   const {
     getProperty,
     getTenancies,
+    fetchTenancies,
     updateProperty,
     createTenancy,
     updateTenancy,
@@ -64,6 +65,11 @@ function PropertyDetailPage() {
   const property = getProperty(id);
   const [editingTenancy, setEditingTenancy] = useState<Tenancy | null>(null);
   const [addOpen, setAddOpen] = useState(false);
+
+  useEffect(() => {
+    if (property) void fetchTenancies(property.id);
+  }, [property?.id]);
+
 
   if (!property) {
     return (
@@ -111,8 +117,8 @@ function PropertyDetailPage() {
             <PropertyForm
               initial={property}
               submitLabel="Save changes"
-              onSubmit={(data) => {
-                updateProperty(property.id, data);
+              onSubmit={async (data) => {
+                await updateProperty(property.id, data);
                 toast.success("Property updated");
               }}
             />
@@ -139,9 +145,9 @@ function PropertyDetailPage() {
                 </DialogHeader>
                 <TenancyForm
                   propertyId={property.id}
-                  onSubmit={(data) => {
+                  onSubmit={async (data) => {
                     try {
-                      createTenancy(data);
+                      await createTenancy(data);
                       toast.success("Tenancy created");
                       setAddOpen(false);
                     } catch (e) {
@@ -211,9 +217,9 @@ function PropertyDetailPage() {
             <TenancyForm
               propertyId={property.id}
               initial={editingTenancy}
-              onSubmit={(data) => {
+              onSubmit={async (data) => {
                 try {
-                  updateTenancy(editingTenancy.id, data);
+                  await updateTenancy(editingTenancy.id, data);
                   toast.success("Tenancy updated");
                   setEditingTenancy(null);
                 } catch (e) {

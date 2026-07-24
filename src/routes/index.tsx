@@ -87,8 +87,8 @@ function PropertyListPage() {
                 <DialogTitle>Add property</DialogTitle>
               </DialogHeader>
               <PropertyForm
-                onSubmit={(data) => {
-                  createProperty(data);
+                onSubmit={async (data) => {
+                  await createProperty(data);
                   setOpen(false);
                 }}
                 onCancel={() => setOpen(false)}
