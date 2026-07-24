@@ -87,6 +87,21 @@ export const Route = createFileRoute("/api/supabase/tenancies")({
         if (error) return Response.json({ error: error.message }, { status: 502 });
         return Response.json(data, { status: 201 });
       },
+      DELETE: async ({ request }) => {
+        const check = getTenantAuth(request);
+        if (!check.ok) return check.response;
+        const url = new URL(request.url);
+        const id = url.searchParams.get("id");
+        const propertyId = url.searchParams.get("propertyId");
+        if (!id || !propertyId)
+          return Response.json({ error: "Missing id or propertyId" }, { status: 400 });
+        if (!(await ownsProperty(propertyId, check.auth.tenantCode)))
+          return Response.json({ error: "Not found" }, { status: 404 });
+        const { error } = await supabase.from("tenancies").delete()
+          .eq("id", id).eq("tenant_code", check.auth.tenantCode);
+        if (error) return Response.json({ error: error.message }, { status: 502 });
+        return new Response(null, { status: 204 });
+      },
     },
   },
 });

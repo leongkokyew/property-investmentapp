@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-const UPSTREAM = "https://openapi.account.qne.cloud/api/ARDNs/List";
+const UPSTREAM = "https://openapi.account.qne.cloud/api/ARDNs/Query";
 const FORWARDED = ["$filter", "$top", "$skip", "$orderby"] as const;
 
 export const Route = createFileRoute("/api/n3/debits")({
